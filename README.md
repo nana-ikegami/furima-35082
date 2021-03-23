@@ -56,9 +56,9 @@
 
 | Column            | Type       | Options      |
 | ----------------- | ---------- | ------------ |
-| oder_id           | integer    | null: false  |
+| order             | references | null: false  |
 | post_code         | string     | null: false  |
-| place_shipment_id | string     | null: false  |
+| place_shipment_id | integer    | null: false  |
 | city              | string     | null: false  |
 | address_number    | string     | null: false  |
 | building_name     |            |              |
@@ -77,5 +77,5 @@
 
 ### Association
 - belongs_to :item
-- belongs_to :address
+- has_one :address
 - belongs_to :user
