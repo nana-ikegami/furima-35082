@@ -18,17 +18,18 @@
 
 - has_many :comments
 - has_many :orders
+- has_many :items
 
 ## comments テーブル
 
-| Column      | Type      | Options     |
-| ----------- | --------- | ----------- |
-| text        | text      | null: false |
-| user        | references| null: false |
+| Column      | Type      | Options                       |
+| ----------- | --------- | ----------------------------- |
+| text        | text      | null: false                   |
+| user        | references| null: false,foreign_key: true |
 
 ### Association
 
-- belongs_to :user
+- belongs_to :oder
 - belongs_to :item
 
 ## items テーブル
@@ -53,18 +54,18 @@
 
 ## addressesテーブル
 
-| Column            | Type       | Options                       |
-| ----------------- | ---------- | ----------------------------- |
-| user              | references | null: false                   |
-| post_code         | string     | null: false                   |
-| place_shipment_id | string     | null: false                   |
-| city              | string     | null: false,foreign_key: true |
-| address_number    | string     | null: false                   |
-| building_name     |            |                               |
-| phone_number      | string     | null: false                   |
+| Column            | Type       | Options      |
+| ----------------- | ---------- | ------------ |
+| oder_id           | integer    | null: false  |
+| post_code         | string     | null: false  |
+| place_shipment_id | string     | null: false  |
+| city              | string     | null: false  |
+| address_number    | string     | null: false  |
+| building_name     |            |              |
+| phone_number      | string     | null: false  |
 
 ### Association
-- has_one :order
+- belongs_to :order
 
 
 ## ordersテーブル
@@ -76,4 +77,5 @@
 
 ### Association
 - belongs_to :item
-- belongs_to :oder
+- belongs_to :address
+- belongs_to :user
