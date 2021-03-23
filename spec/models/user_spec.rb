@@ -33,6 +33,5 @@ RSpec.describe User, type: :model do
     it "パスワードとパスワード（確認用）は、値の一致が必須であること" do
     end
   
-    
   end
 end
