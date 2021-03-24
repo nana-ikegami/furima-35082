@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   before do
     @user = FactoryBot.build(:user)
-    sleep(1)
+    # sleep(1)
   end
   describe '新規登録' do
     it "nikcnameがない場合は登録できないこと" do
@@ -120,5 +120,9 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include "Birth day can't be blank"
     end
   
+    it "全ての情報が正しく入力されていれば、登録できること" do
+      expect(@user).to be_valid
+    end
+
   end
 end
