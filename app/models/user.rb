@@ -5,7 +5,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :nickname, presence: true, length: { maximum: 40 }
-  
+
+  with_options presence: true, format: { with: /\A[a-zA-Z0-9]+\z/ } do
+    validates :password
+    validates :password_confirmation
+
   with_options presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥々]+\z/ } do
     validates :family_name
     validates :first_name
