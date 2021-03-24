@@ -6,7 +6,20 @@ RSpec.describe User, type: :model do
     # sleep(1)
   end
   describe '新規登録' do
+   context 'ユーザー登録ができる時' do
     it "全ての情報が正しく入力されていれば、登録できること" do
+      expect(@user).to be_valid
+    end
+
+    it "パスワードは、6文字以上での入力が必須であること（6文字が入力されていれば、登録が可能なこと）" do
+      @user.password = 'ab1234'
+      @user.password_confirmation = 'ab1234'
+      expect(@user).to be_valid
+    end
+
+    it "パスワードは、半角英数字混合での入力が必須であること（半角英数字が混合されていれば、登録が可能なこと）" do
+      @user.password = 'abc123'
+      @user.password_confirmation = 'abc123'
       expect(@user).to be_valid
     end
 
@@ -15,7 +28,9 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include "Nickname can't be blank"
     end
+    end
 
+    context 'ユーザー登録ができない時' do
     it "メールアドレスが必須であること" do
       @user.email = ''
       @user.valid?
@@ -42,17 +57,6 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include "Password can't be blank", "Password confirmation doesn't match Password"
     end
 
-    it "パスワードは、6文字以上での入力が必須であること（6文字が入力されていれば、登録が可能なこと）" do
-      @user.password = 'ab1234'
-      @user.password_confirmation = 'ab1234'
-      expect(@user).to be_valid
-    end
-
-    it "パスワードは、半角英数字混合での入力が必須であること（半角英数字が混合されていれば、登録が可能なこと）" do
-      @user.password = 'abc123'
-      @user.password_confirmation = 'abc123'
-      expect(@user).to be_valid
-    end
 
     it "パスワードは、確認用を含めて2回入力すること" do
       @user.password_confirmation = ''
@@ -148,6 +152,6 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include('Password is invalid')
     end
-
+    end
   end
 end
