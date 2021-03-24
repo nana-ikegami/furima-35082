@@ -1,4 +1,14 @@
 class Item < ApplicationRecord
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to :category
+  belongs_to :condition
+  belongs_to :postagetype
+  belongs_to :preparationday
+  belongs_to :placeshipment
+
+  validates :title, :text, presence: true
+
+  validates :genre_id, numericality: { other_than: 1 } 
 
   belongs_to :user
   has_one :order
