@@ -40,9 +40,9 @@ ActiveRecord::Schema.define(version: 2021_03_24_065323) do
     t.bigint "user_id", null: false
     t.text "descuription", null: false
     t.integer "condition_id", null: false
-    t.integer "postage_type_id", null: false
-    t.integer "preparation_day_id", null: false
-    t.integer "place_shipment_id", null: false
+    t.integer "postagetype_id", null: false
+    t.integer "preparationday_id", null: false
+    t.integer "placeshipment_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_items_on_user_id"
