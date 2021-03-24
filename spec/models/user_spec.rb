@@ -6,6 +6,10 @@ RSpec.describe User, type: :model do
     # sleep(1)
   end
   describe '新規登録' do
+    it "全ての情報が正しく入力されていれば、登録できること" do
+      expect(@user).to be_valid
+    end
+
     it "nikcnameがない場合は登録できないこと" do
       @user.nickname = ''
       @user.valid?
@@ -45,8 +49,8 @@ RSpec.describe User, type: :model do
     end
 
     it "パスワードは、半角英数字混合での入力が必須であること（半角英数字が混合されていれば、登録が可能なこと）" do
-      @user.password = '123456'
-      @user.password_confirmation = '123456'
+      @user.password = 'abc123'
+      @user.password_confirmation = 'abc123'
       expect(@user).to be_valid
     end
 
@@ -87,9 +91,6 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include "First name kana can't be blank"
     end
 
-    it "ユーザー本名は、全角（漢字・ひらがな・カタカナ）での入力が必須であること" do
-    end
-
     it 'family_nameが全角入力でなければ登録できないこと' do
       @user.family_name = 'ｱｲｳｴｵ'
       @user.valid?
@@ -119,9 +120,33 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include "Birth day can't be blank"
     end
-  
-    it "全ての情報が正しく入力されていれば、登録できること" do
-      expect(@user).to be_valid
+
+    it 'passwordが６文字以上でないと登録できないこと' do
+      @user.password = 'abc12'
+      @user.password_confirmation = 'abc12'
+      @user.valid?
+      expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
+    end
+
+    it 'passwordが英語のみでは登録できないこと' do
+      @user.password = 'abcdef'
+      @user.password_confirmation = 'abcdef'
+      @user.valid?
+      expect(@user.errors.full_messages).to include('Password is invalid')
+    end
+
+    it 'passwordが数字のみでは登録できないこと' do
+      @user.password = '123456'
+      @user.password_confirmation = '123456'
+      @user.valid?
+      expect(@user.errors.full_messages).to include('Password is invalid')
+    end
+
+    it 'passwordが全角では登録できないこと' do
+      @user.password = 'ａｂｃ１２３'
+      @user.password_confirmation = 'ａｂｃ１２３'
+      @user.valid?
+      expect(@user.errors.full_messages).to include('Password is invalid')
     end
 
   end
