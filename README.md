@@ -42,9 +42,9 @@
 | user                | references| null: false,foreign_key: true |
 | descuription        | text      | null: false                   |
 | condition_id        | integer   | null: false                   |
-| postage_type_id     | integer   | null: false                   |
-| preparation_day_id  | integer   | null: false                   |
-| place_shipment_id   | integer   | null: false                   |
+| postagetype_id     | integer   | null: false                   |
+| preparationday_id  | integer   | null: false                   |
+| placeshipment_id   | integer   | null: false                   |
 
 ### Association
 
