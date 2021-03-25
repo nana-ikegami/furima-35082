@@ -103,5 +103,35 @@ RSpec.describe Item, type: :model do
       @item.valid?
       expect(@item.errors.full_messages).to include "Price is invalid"
     end
+
+    it "商品の状態で{ id: 1, name: '--' }が選択された時に登録できないこと" do
+      @item.condition_id = '1'
+      @item.valid?
+      expect(@item.errors.full_messages).to include "Condition must be other than 1"
+    end
+
+    it "配送料の負担で{ id: 1, name: '--' }が選択された時に登録できないこと" do
+      @item.postagetype_id = '1'
+      @item.valid?
+      expect(@item.errors.full_messages).to include "Postagetype must be other than 1"
+    end
+
+    it "発送元の地域で{ id: 1, name: '--' }が選択された時に登録できないこと" do
+      @item.placeshipment_id = '1'
+      @item.valid?
+      expect(@item.errors.full_messages).to include "Placeshipment must be other than 1"
+    end
+
+    it "発送までの日数で{ id: 1, name: '--' }が選択された時に登録できないこと" do
+      @item.preparationday_id = '1'
+      @item.valid?
+      expect(@item.errors.full_messages).to include "Preparationday must be other than 1"
+    end
+
+    it "カテゴリーで{ id: 1, name: '--' }が選択された時に登録できないこと" do
+      @item.category_id = '1'
+      @item.valid?
+      expect(@item.errors.full_messages).to include "Category must be other than 1"
+    end
 end
 end
