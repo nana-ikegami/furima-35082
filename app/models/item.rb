@@ -6,10 +6,6 @@ class Item < ApplicationRecord
   belongs_to :preparationday
   belongs_to :placeshipment
 
-  validates :title, :text, presence: true
-
-  validates :genre_id, numericality: { other_than: 1 } 
-
   belongs_to :user
   has_one :order
   has_many :comments
@@ -21,9 +17,9 @@ class Item < ApplicationRecord
   validates :user, presence: true
   validates :descuription, presence: true
   validates :condition_id, presence: true
-  validates :postage_type_id, presence: true
-  validates :preparation_day_id, presence: true
-  validates :place_shipment_id, presence: true
+  validates :postagetype_id, presence: true
+  validates :preparationday_id, presence: true
+  validates :placeshipment_id, presence: true
 
   validates :image, presence: true
 end
