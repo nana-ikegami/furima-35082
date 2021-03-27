@@ -58,7 +58,7 @@
 | ----------------- | ---------- | ------------------------------ |
 | order             | references | null: false,foreign_key: true  |
 | post_code         | string     | null: false                    |
-| place_shipment_id | integer    | null: false                    |
+| placeshipment_id | integer    | null: false                    |
 | city              | string     | null: false                    |
 | address_number    | string     | null: false                    |
 | building_name     |            |                                |
