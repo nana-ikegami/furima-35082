@@ -1,6 +1,6 @@
 class OrderAddress
   include ActiveModel::Model
-  attr_accessor :user,:item, :order, :post_code, :placeshipment_id, :city, :address_number, :building_name, :phone_number
+  attr_accessor :user_id,:item_id, :order_id, :post_code, :placeshipment_id, :city, :address_number, :building_name, :phone_number
   
   with_options presence: true do
     validates :user
@@ -15,8 +15,7 @@ class OrderAddress
   end
 
   def save
-    # 各テーブルにデータを保存する処理を書く
-    order = Order.create(user: user, item: item)
-    address = Address.create(order: order, post_code: post_code, placeshipment_id: placeshipment_id, city: city, address_number: address_number, building_name: building_name, phone_number: phone_number)
+    order = Order.create(user_id: user_id, item_id: item_id)
+    address = Address.create(order_id: order.id, post_code: post_code, placeshipment_id: placeshipment_id, city: city, address_number: address_number, building_name: building_name, phone_number: phone_number)
   end
 end
