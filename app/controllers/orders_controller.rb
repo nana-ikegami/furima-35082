@@ -5,7 +5,14 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @order = OrderAddress.new
+    @order = OrderAddress.new(order_address_params)
+    @item = Item.find(params[:item_id])
+    if @order.valid?
+       @order.save
+      return redirect_to root_path
+    else
+      render 'index'
+    end
   end
 
   private
