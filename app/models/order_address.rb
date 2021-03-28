@@ -3,9 +3,8 @@ class OrderAddress
   attr_accessor :user_id,:item_id, :order_id, :post_code, :placeshipment_id, :city, :address_number, :building_name, :phone_number
   
   with_options presence: true do
-    validates :user
-    validates :item
-    validates :order
+    validates :user_id
+    validates :item_id
     validates :post_code
     validates :placeshipment_id
     validates :city
