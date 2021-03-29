@@ -87,5 +87,11 @@ RSpec.describe OrderAddress, type: :model do
       @order_address.valid?
       expect(@order_address.errors.full_messages).to include "Phone number is invalid"
     end
+
+    it "都道府県で{ id: 1, name: '--' }が選択された時に登録できないこと" do
+      @item.placeshipment_id = '1'
+      @item.valid?
+      expect(@item.errors.full_messages).to include "Placeshipment must be other than 1"
+    end
   end
 end
