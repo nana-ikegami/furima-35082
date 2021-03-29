@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   validates :nickname, presence: true, length: { maximum: 40 }
 
-  with_options presence: true, format: { with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i } do
+  with_options presence: true, format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i } do
     validates :password
     validates :password_confirmation
   end
@@ -16,13 +16,13 @@ class User < ApplicationRecord
     validates :first_name
   end
 
-  with_options presence: true, format: { with: /\A[ァ-ヶー－]+\z/ }do
+  with_options presence: true, format: { with: /\A[ァ-ヶー－]+\z/ } do
     validates :family_name_kana
     validates :first_name_kana
   end
 
   validates :birth_day, presence: true
-  
+
   has_many :comments
   has_many :orders
   has_many :items
