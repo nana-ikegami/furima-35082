@@ -2,14 +2,9 @@ require 'rails_helper'
 
 RSpec.describe OrderAddress, type: :model do
   before do
-    @item = FactoryBot.build(:item)
-    @item.save
-    @user = FactoryBot.build(:user)
-    @user.email = 'test2@example'
-    @user.save
-    @order_address = FactoryBot.build(:order_address)
-    @order_address.user_id = @user.id
-    @order_address.item_id = @item.id
+    @item = FactoryBot.create(:item)
+    @user = FactoryBot.create(:user, email: 'test2@example' )
+    @order_address = FactoryBot.build(:order_address, item_id: @item.id, user_id: @user.id)
     sleep(1)
   end
   describe '商品購入機能' do
