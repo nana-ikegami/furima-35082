@@ -89,7 +89,7 @@ RSpec.describe OrderAddress, type: :model do
     end
 
     it "都道府県で{ id: 1, name: '--' }が選択された時に登録できないこと" do
-      @item.placeshipment_id = '1'
+      @item.placeshipment_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include "Placeshipment must be other than 1"
     end
