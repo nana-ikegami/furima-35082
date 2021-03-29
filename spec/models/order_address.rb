@@ -2,13 +2,27 @@ require 'rails_helper'
 
 RSpec.describe OrderAddress, type: :model do
   before do
+    @item = FactoryBot.build(:item)
+    @item.save
+    @user = FactoryBot.build(:user)
+    @user.email = 'test2@example'
+    @user.save
     @order_address = FactoryBot.build(:order_address)
+    @order_address.user_id = @user.id
+    @order_address.item_id = @item.id
+    sleep(1)
   end
   describe '商品購入機能' do
     context '購入ができる時' do
      it "全ての情報が正しく入力されていれば、購入できること" do
        expect(@order_address).to be_valid
      end
+
+     it "建物名が空の場合でも保存できること" do
+      @order_address.building_name = ''
+      expect(@order_address).to be_valid
+    end
+
     end
   end
 
@@ -69,6 +83,12 @@ RSpec.describe OrderAddress, type: :model do
 
     it "電話番号が11桁以内の数値のみであること" do
       @order_address.phone_number = '000000000000'
+      @order_address.valid?
+      expect(@order_address.errors.full_messages).to include "Phone number is invalid"
+    end
+
+    it "電話番号は英数混合では登録できないこと" do
+      @order_address.phone_number = '0000000000a'
       @order_address.valid?
       expect(@order_address.errors.full_messages).to include "Phone number is invalid"
     end
